@@ -1,17 +1,9 @@
 import Config
 import Path
-import Core.Utils.ConfigParser
+import Utils.ConfigParser
 
 if System.get_env("DATABASE_URL") == nil do
-  dotenv_path = Path.join(__DIR__, "../.env")
-
-  if File.exists?(dotenv_path) do
-
-    Dotenv.load(dotenv_path)
-    IO.puts "DEBUG: Loaded config from #{dotenv_path}."
-  else
-    IO.puts "WARNING: .env not found at #{dotenv_path}. Relying on System Environment Variables."
-  end
+    Dotenv.load!(".env.development")
 end
 
 database_url =
@@ -35,7 +27,7 @@ base_repo_config = [
 ]
 
 repo_config =
-  case Core.Utils.ConfigParser.parse_base64_encoded_pem_cert(System.get_env("DATABASE_BASE64_ENCODED_CA_CERTS")) do
+  case Utils.ConfigParser.parse_base64_encoded_pem_cert(System.get_env("DATABASE_BASE64_ENCODED_CA_CERTS")) do
     certs when certs != [] ->
       Keyword.merge(base_repo_config,
         ssl: [

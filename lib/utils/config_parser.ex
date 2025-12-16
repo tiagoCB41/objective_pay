@@ -1,4 +1,4 @@
-defmodule Core.Utils.ConfigParser do
+defmodule Utils.ConfigParser do
   @moduledoc """
   Utility functions for parsing various configuration formats.
   """

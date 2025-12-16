@@ -7,6 +7,8 @@ defmodule ObjectivePayWeb.Router do
 
   scope "/api", ObjectivePayWeb do
     pipe_through :api
+
+    post "/conta", AccountController, :create_account
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

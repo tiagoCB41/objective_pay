@@ -1,0 +1,55 @@
+# docker-compose.dev.yml
+name: objective_pay_dev
+
+services:
+  postgres:
+    image: postgres:14.7
+    container_name: objective_pay_dev_postgres
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - objective_pay_pg_data_dev:/var/lib/postgresql/data
+      
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev 
+    image: objective_pay-app-dev 
+    container_name: objective_pay_dev_app
+    
+    volumes:
+      - .:/app 
+      - /app/.git
+      - objective_pay_mix_cache:/app/.mix
+      - objective_pay_deps:/app/deps
+      - objective_pay_build:/app/_build
+    
+    env_file: .env
+    
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      DB_HOST: postgres
+      MIX_ENV: "dev" 
+      PHX_SERVER: "true" 
+      
+    ports:
+      - "4000:4000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+        
+volumes:
+  objective_pay_pg_data_dev:
+  objective_pay_mix_cache:
+  objective_pay_deps:
+  objective_pay_build:
