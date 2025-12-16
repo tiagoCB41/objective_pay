@@ -5,7 +5,7 @@ defmodule ObjectivePay.Repo.Migrations.CreateAccountsTable do
     create table(:account, primary_key: false) do
       add :id, :binary_id, primary_key: true, null: false
       add :numero_conta, :integer, null: false
-      add :saldo, :float, null: false
+      add :saldo, :decimal, null: false
 
       timestamps(type: :utc_datetime)
     end

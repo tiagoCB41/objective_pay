@@ -5,10 +5,12 @@ defmodule ObjectivePayWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", ObjectivePayWeb do
+  scope "/", ObjectivePayWeb do
     pipe_through :api
 
+    get "/conta", AccountController, :show_account
     post "/conta", AccountController, :create_account
+    post "/transacao", AccountController, :create_transaction
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

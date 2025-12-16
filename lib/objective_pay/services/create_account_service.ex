@@ -26,6 +26,9 @@ defmodule ObjectivePay.Services.CreateAccountService do
     case Account.Repository.insert_account(params) do
       {:ok, account} ->
         {:ok, account}
+
+      {:error, {:invalid_data, changeset}} ->
+        {:error, {:invalid_data, changeset}}
     end
   end
 end

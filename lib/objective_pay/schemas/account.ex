@@ -5,11 +5,12 @@ defmodule ObjectivePay.Schemas.Account do
 
   use ObjectivePay.Schema
   import Ecto.Changeset
+  alias Decimal
 
   @type t :: %__MODULE__{
           id: Ecto.UUID.t(),
           numero_conta: integer(),
-          saldo: float(),
+          saldo: Decimal.t(),
           inserted_at: DateTime.t(),
           updated_at: DateTime.t()
         }
@@ -19,7 +20,7 @@ defmodule ObjectivePay.Schemas.Account do
 
   schema "account" do
     field :numero_conta, :integer
-    field :saldo, :float, default: 0.0
+    field :saldo, :decimal
 
     timestamps()
   end

@@ -1,8 +1,6 @@
 defmodule ObjectivePay.Schemas.Account.Repository do
   @moduledoc false
 
-  import Ecto.Query
-
   alias ObjectivePay.Repo
   alias ObjectivePay.Schemas.Account
 
@@ -14,7 +12,7 @@ defmodule ObjectivePay.Schemas.Account.Repository do
     end
   end
 
-   @spec insert_account(map()) ::
+  @spec insert_account(map()) ::
           {:ok, Account.t()} | {:error, {:invalid_data, Ecto.Changeset.t()}}
   def insert_account(params) do
     %Account{}
@@ -28,5 +26,10 @@ defmodule ObjectivePay.Schemas.Account.Repository do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:error, {:invalid_data, changeset}}
     end
+  end
+
+  @spec update_saldo(Ecto.Changeset.t()) :: {:ok, Account.t()} | {:error, Ecto.Changeset.t()}
+  def update_saldo(changeset) do
+    Repo.update(changeset)
   end
 end

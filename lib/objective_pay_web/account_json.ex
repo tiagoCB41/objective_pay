@@ -4,14 +4,15 @@ defmodule ObjectivePayWeb.AccountJSON do
   into the final API structure.
   """
   alias ObjectivePay.Schemas.Account
+  alias Decimal
 
   @type assigns :: %{
            :account => ObjectivePay.Schemas.Account.t(),
            optional(any()) => any()
          }
 
-  @spec create_account(assigns()) :: %{String.t() => integer() | float()}
-  def create_account(assigns) do
+  @spec show_account(assigns()) :: %{String.t() => integer() | Decimal.t()}
+  def show_account(assigns) do
     %{account: %Account{} = account} = assigns
 
     %{
