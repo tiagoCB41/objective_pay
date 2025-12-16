@@ -18,7 +18,8 @@ defmodule ObjectivePay.MixProject do
             runtime_tools: :permanent
           ]
         ]
-      ]
+      ],
+      compilers: Mix.compilers(),
     ]
   end
 
@@ -39,7 +40,7 @@ defmodule ObjectivePay.MixProject do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support"] # <-- Corrigido para "support"
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -53,14 +54,8 @@ defmodule ObjectivePay.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
-      {:heroicons,
-       github: "tailwindlabs/heroicons",
-       tag: "v2.2.0",
-       sparse: "optimized",
-       app: false,
-       compile: false,
-       depth: 1},
+      {:ex_machina, "~> 2.7", only: :test},
+      {:mox, "~> 1.0", only: :test},
       {:swoosh, "~> 1.16"},
       {:req, "~> 0.5"},
       {:telemetry_metrics, "~> 1.0"},

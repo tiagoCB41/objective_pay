@@ -51,14 +51,13 @@ defmodule ObjectivePay.Services.TransactionService do
     if Decimal.compare(new_saldo, Decimal.new(0)) == :lt do
       {:error, :insufficient_balance}
     else
-      # 3. Prepara as mudanças e persiste no Repositório
       changeset = Account.changeset(account, %{saldo: new_saldo})
 
       case Account.Repository.update_saldo(changeset) do
         {:ok, updated_account} ->
           {:ok, updated_account}
 
-        {:error, changeset} ->
+        {:error, _changeset} ->
           {:error, :database_write_failure}
       end
     end

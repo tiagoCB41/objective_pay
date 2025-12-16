@@ -12,7 +12,6 @@ defmodule ObjectivePay.Commands.CreateAccountCommand do
          }
 
   @required [:numero_conta, :saldo]
-  @optional []
 
   embedded_schema do
     field(:numero_conta, :integer)
