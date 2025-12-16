@@ -2,7 +2,7 @@
 
 ## 🎯 Visão Geral e Arquitetura
 
-Este projeto implementa uma API RESTful para gestão contas e transações, desenvolvida em **Elixir/Phoenix**. A arquitetura foca na **separação de responsabilidades** e **tolerância a falhas** inerentes ao ecossistema BEAM/OTP.
+Este projeto implementa uma API RESTful para gestão de contas e transações, desenvolvida em **Elixir/Phoenix**. A arquitetura foca na **separação de responsabilidades** e **tolerância a falhas** inerentes ao ecossistema BEAM/OTP.
 
 A solução segue um padrão **Command-Service Architecture**:
 * **Camada de Comando/Validação:** Utiliza `Ecto.Changeset` para validação de *schema* e regras de entrada.
